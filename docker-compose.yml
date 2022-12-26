@@ -1,0 +1,15 @@
+version: '3'
+services:
+  pgsql:
+    container_name: postgres
+    image: nikitabondarenko1999/cms-postgres:latest
+    environment:
+      - POSTGRES_USER=nikita
+      - POSTGRES_DB=cms
+      - POSTGRES_PASSWORD=jaya
+    ports:
+      - 5432:5432
+    volumes:
+        - cms:/var/lib/postgresql/data
+volumes:
+    cms:

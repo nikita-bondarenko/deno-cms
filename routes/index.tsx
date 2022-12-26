@@ -34,45 +34,8 @@ import {Handlers, PageProps} from "$fresh/src/server/types.ts";
 
 export const handler: Handlers<any[] | null> = {
 
-
     async GET(_, ctx) {
-
-
-        const DATA_SOURCE = "Cluster0";
-        const DATABASE = "bscms";
-        const COLLECTION = "content";
-        const DATA_API_KEY = Deno.env.get('DATA_API_KEY')
-        const APP_ID = Deno.env.get('APP_ID')
-        const BASE_URL = Deno.env.get('BASE_URL')
-
-        const data = JSON.stringify({
-            "collection": "content",
-            "database": "bscms",
-            "dataSource": "Cluster0",
-        })
-
-        const options = {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Request-Headers': '*',
-                'api-key': 'XL09f4yxdjeKQ97ictuMhpMOSaYK5Fj6QF20sVUDd4IIXc9FK0cIBA4Gfdvg3ezo'
-            },
-            body: data
-        };
-
-        const URI = 'https://data.mongodb-api.com/app/data-xsrhz/endpoint/data/v1/action/find';
-
-        const dataResponse = await fetch(URI, options);
-
-        const allTodos = await dataResponse.json();
-        if (!
-            allTodos
-        ) {
-            return ctx.render(null)
-        } else {
-            return ctx.render(allTodos)
-        }
+        return ctx.render()
     }
 }
 

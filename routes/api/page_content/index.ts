@@ -12,20 +12,22 @@ import { Client } from "https://deno.land/x/postgres@v0.17.0/mod.ts";
 // });
 // await client.connect();
 
-// export const handler: Handlers<any[] | null> = {
-//
-//
-//     async GET(_req: Request, _ctx: HandlerContext) {
-//
-//         // const result = await client.queryObject("SELECT * FROM VALUES")
-//         const result = await prisma.values.create({
-//             data: {
-//                 key: "test",
-//                 value: "hari"
-//             }
-//         })
-//
-//         console.log(result)
-//         return new Response(result)
-//     }
-// }
+export const handler: Handlers<any[] | null> = {
+
+
+    async GET(_req: Request, _ctx: HandlerContext) {
+
+        // const result = await client.queryObject("SELECT * FROM VALUES")
+        // const result = await prisma.values.create({
+        //     data: {
+        //         key: "test",
+        //         value: "hari"
+        //     }
+        // })
+
+        const result = await prisma.user.findMany()
+
+        console.log(result)
+        return new Response(result)
+    }
+}

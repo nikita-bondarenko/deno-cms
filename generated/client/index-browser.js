@@ -88,14 +88,55 @@ Prisma.NullTypes = {
 // https://github.com/microsoft/TypeScript/issues/3192#issuecomment-261720275
 function makeEnum(x) { return x; }
 
+exports.Prisma.ImageScalarFieldEnum = makeEnum({
+  id: 'id',
+  key: 'key',
+  value: 'value',
+  sectionId: 'sectionId'
+});
+
+exports.Prisma.ListItemScalarFieldEnum = makeEnum({
+  id: 'id',
+  key: 'key',
+  value: 'value',
+  listId: 'listId'
+});
+
+exports.Prisma.ListScalarFieldEnum = makeEnum({
+  id: 'id',
+  key: 'key',
+  sectionId: 'sectionId'
+});
+
 exports.Prisma.QueryMode = makeEnum({
   default: 'default',
   insensitive: 'insensitive'
 });
 
+exports.Prisma.SectionScalarFieldEnum = makeEnum({
+  id: 'id',
+  key: 'key'
+});
+
+exports.Prisma.SessionScalarFieldEnum = makeEnum({
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  refreshToken: 'refreshToken',
+  accessToken: 'accessToken',
+  userId: 'userId'
+});
+
 exports.Prisma.SortOrder = makeEnum({
   asc: 'asc',
   desc: 'desc'
+});
+
+exports.Prisma.TextScalarFieldEnum = makeEnum({
+  id: 'id',
+  key: 'key',
+  value: 'value',
+  sectionId: 'sectionId'
 });
 
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
@@ -105,17 +146,21 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.ValuesScalarFieldEnum = makeEnum({
+exports.Prisma.UserScalarFieldEnum = makeEnum({
   id: 'id',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  key: 'key',
-  value: 'value'
+  login: 'login',
+  password: 'password'
 });
 
 
 exports.Prisma.ModelName = makeEnum({
-  Values: 'Values'
+  Text: 'Text',
+  Image: 'Image',
+  Section: 'Section',
+  List: 'List',
+  ListItem: 'ListItem',
+  User: 'User',
+  Session: 'Session'
 });
 
 /**

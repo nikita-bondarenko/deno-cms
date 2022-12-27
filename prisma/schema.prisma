@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["deno"]
   output          = "../generated/client"
 }
@@ -13,42 +13,58 @@ datasource db {
 }
 
 model Text {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  key String   @db.VarChar(255)
-  value String   @db.VarChar(255)
+  id        Int     @id @default(autoincrement())
+  key       String  @db.VarChar(255)
+  value     String  @db.VarChar(255)
+  section   Section @relation(fields: [sectionId], references: [id])
+  sectionId Int
 }
 
 model Image {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  key String   @db.VarChar(255)
-  value String   @db.VarChar(255)
+  id        Int     @id @default(autoincrement())
+  key       String  @db.VarChar(255)
+  value     String  @db.VarChar(255)
+  section   Section @relation(fields: [sectionId], references: [id])
+  sectionId Int
 }
 
 model Section {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  key String   @db.VarChar(255)
-  value String   @db.VarChar(255)
+  id    Int     @id @default(autoincrement())
+  key   String  @db.VarChar(255) @unique
+  txt   Text[]
+  img   Image[]
+  lists List[]
 }
 
 model List {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  key String   @db.VarChar(255)
-  value String   @db.VarChar(255)
+  id        Int        @id @default(autoincrement())
+  key       String     @db.VarChar(255)
+  section   Section    @relation(fields: [sectionId], references: [id])
+  sectionId Int
+  items     ListItem[]
 }
 
-model ListData {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  key String   @db.VarChar(255)
-  value String   @db.VarChar(255)
+model ListItem {
+  id     Int    @id @default(autoincrement())
+  key    String @db.VarChar(255)
+  value  String @db.VarChar(255)
+  list   List   @relation(fields: [listId], references: [id])
+  listId Int
 }
 
+model User {
+  id       Int       @id @default(autoincrement())
+  login    String    @db.VarChar(255) @unique
+  password String    @db.VarChar(255)
+  sessions Session[]
+}
+
+model Session {
+  id           Int      @id @default(autoincrement())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  refreshToken String   @db.VarChar(255)
+  accessToken  String   @db.VarChar(255)
+  user         User     @relation(fields: [userId], references: [id])
+  userId       Int
+}

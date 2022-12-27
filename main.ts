@@ -6,20 +6,25 @@
 
 import {start} from "$fresh/server.ts";
 import manifest from "./fresh.gen.ts";
-
-import twindPlugin from "$fresh/plugins/twind.ts";
-import twindConfig from "./twind.config.ts";
-
-import { Client } from "https://deno.land/x/postgres@v0.17.0/mod.ts";
-
-const client = new Client({
-    user: "nikita",
-    database: "cms",
-    hostname: "localhost",
-    port: 5432,
-    password: "jaya",
-});
-await client.connect();
+import {config} from "dotenv";
 
 
-await start(manifest, {plugins: [twindPlugin(twindConfig)]});
+import {config} from "https://deno.land/std@0.163.0/dotenv/mod.ts";
+import {PrismaClient} from './generated/client/deno/edge.ts'
+
+console.log(config())
+
+
+const envVars = await config()
+console.log(envVars);
+export const prisma = new PrismaClient({
+    datasources: {
+        db: {
+            url: envVars.PRISMA_URL
+        }
+    }
+})
+
+
+
+await start(manifest);

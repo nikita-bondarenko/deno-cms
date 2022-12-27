@@ -12,10 +12,43 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Values {
+model Text {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   key String   @db.VarChar(255)
   value String   @db.VarChar(255)
 }
+
+model Image {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  key String   @db.VarChar(255)
+  value String   @db.VarChar(255)
+}
+
+model Section {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  key String   @db.VarChar(255)
+  value String   @db.VarChar(255)
+}
+
+model List {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  key String   @db.VarChar(255)
+  value String   @db.VarChar(255)
+}
+
+model ListData {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  key String   @db.VarChar(255)
+  value String   @db.VarChar(255)
+}
+
